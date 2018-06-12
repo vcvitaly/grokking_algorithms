@@ -43,24 +43,34 @@ def find_lowest_cost_node(costs):
 
 # Find the lowest-cost node that you haven't processed yet.
 node = find_lowest_cost_node(costs)
+print ("lowest_cost_node -> " + node)
 # If you've processed all the nodes, this while loop is done.
 while node is not None:
     cost = costs[node]
+    print ("\tcost = " + str(cost))
     # Go through all the neighbors of this node.
     neighbors = graph[node]
+    print ("\tneighbors = " + str(neighbors))
     for n in neighbors.keys():
         new_cost = cost + neighbors[n]
+        print ("\t\tnew_cost = cost + neighbors[n] = " + str(cost) + " + " + str(neighbors[n]))
         # If it's cheaper to get to this neighbor by going through this node...
         if costs[n] > new_cost:
+            print("\t\t\tcosts[" + str(n) + "] > new_cost = " + str(costs[n]) + " > " + str(
+                new_cost) + ", so costs[" + str(
+                n) + "] = " + str(new_cost) + " and parents[" + str(n) + "] = " + node)
             # ... update the cost for this node.
             costs[n] = new_cost
             # This node becomes the new parent for this neighbor.
             parents[n] = node
     # Mark the node as processed.
     processed.append(node)
+    print ("\tprocessed = " + str(processed))
     # Find the next node to process, and loop.
     node = find_lowest_cost_node(costs)
+    print("new lowest_cost_node -> " + str(node))
 
-print "Cost from the start to each node:"
-print costs
+
+print ("Cost from the start to each node:")
+print (costs)
 
